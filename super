@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Потужнометр</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial Black', sans-serif;
+      background: radial-gradient(circle at center, #2b2b2b 0%, #1a1a1a 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }.card {
+  background: #111;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.1);
+  text-align: center;
+  width: 300px;
+}
+
+.flag {
+  font-size: 28px;
+}
+
+h1 {
+  margin: 10px 0 5px;
+  font-size: 24px;
+}
+
+.version {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+.bar {
+  display: flex;
+  margin: 10px 0;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bar span {
+  flex: 1;
+  transition: background 0.3s;
+}
+
+.output {
+  font-size: 48px;
+  color: red;
+  margin: 10px 0;
+}
+
+.label {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+button {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #444;
+}
+
+.emoji-row {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 5px 10px;
+}
+
+.phrase {
+  font-size: 14px;
+  margin-top: 10px;
+  color: #ccc;
+}
+
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="flag">🇺🇦 ПОТУЖНОМЕТР</div>
+    <div class="version">ПМ-v2.2.0</div><div class="emoji-row">
+  <span>🥳</span>
+  <span>☠️</span>
+</div>
+
+<div class="bar" id="powerBar">
+  <!-- 20 сегментів -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      document.write('<span></span>');
+    }
+  </script>
+</div>
+
+<div class="output" id="powerValue">0</div>
+<div class="label">ПТЖ</div>
+
+<button onclick="generatePower()">РУЧНИЙ</button>
+<div class="phrase" id="phrase"></div>
+
+  </div>  <script>
+    const bar = document.getElementById('powerBar').children;
+    const output = document.getElementById('powerValue');
+    const phraseBox = document.getElementById('phrase');
+
+    const phrases = [
+      "Ти — справжній богатир!",
+      "Потужність зашкалює!",
+      "Так собі… Потрібно ще попрацювати!",
+      "Потужно, але не максимально!",
+      "Ого, ти сильніший за медведя!",
+      "Потужність як у маминої котлети!",
+      "Ти можеш підняти трактор одним пальцем!",
+      "Навіть Шварценеггер би позаздрив!",
+      "Ти — втілення сили українського духу!",
+      "Ну нічо так… Але можна краще!"
+    ];
+
+    function generatePower() {
+      const value = Math.floor(Math.random() * 101);
+      output.textContent = value;
+      phraseBox.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+
+      for (let i = 0; i < bar.length; i++) {
+        if ((i + 1) * 5 <= value) {
+          if (i < 7) bar[i].style.background = 'lime';
+          else if (i < 14) bar[i].style.background = 'orange';
+          else bar[i].style.background = 'red';
+        } else {
+          bar[i].style.background = '#222';
+        }
+      }
+    }
+  </script></body>
+</html>
